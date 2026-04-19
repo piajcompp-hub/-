@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>10倍速・人生再構築プログラム</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600;700;900&family=Shippori+Mincho:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #d4af37;
+  --gold-light: #f0d060;
+  --gold-dim: #8a6e1a;
+  --black: #000;
+  --black2: #0a0800;
+  --black3: #111008;
+  --text: #c8b878;
+  --text-dim: #8a7a50;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--text);
+  font-family: 'Noto Serif JP', serif;
+  line-height: 1.9;
+  font-size: 16px;
+  overflow-x: hidden;
+}
+
+/* ノイズテクスチャ */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.5;
+}
+
+/* ======= ヒーロー ======= */
+.hero {
+  position: relative;
+  padding: 100px 20px 80px;
+  text-align: center;
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(180,130,20,0.15) 0%, transparent 70%);
+  border-bottom: 1px solid rgba(212,175,55,0.15);
+  overflow: hidden;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 10%; right: 10%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+  opacity: 0.4;
+}
+
+.hero-sub {
+  font-size: 0.9rem;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+  opacity: 0.8;
+  margin-bottom: 1.2rem;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  font-family: 'Shippori Mincho', serif;
+  font-size: clamp(1.8rem, 5vw, 3.2rem);
+  font-weight: 800;
+  color: var(--gold-light);
+  text-shadow: 0 0 40px rgba(212,175,55,0.4), 0 0 80px rgba(212,175,55,0.15);
+  line-height: 1.4;
+  letter-spacing: 0.05em;
+  margin-bottom: 1rem;
+}
+
+.hero h2 {
+  font-size: clamp(1rem, 2.5vw, 1.4rem);
+  font-weight: 400;
+  color: var(--text);
+  letter-spacing: 0.1em;
+  margin-bottom: 2.5rem;
+}
+
+.hero-intro {
+  font-size: 0.95rem;
+  color: var(--text-dim);
+  max-width: 560px;
+  margin: 0 auto;
+  line-height: 2.0;
+}
+
+/* ======= セクション共通 ======= */
+.section {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 70px 24px;
+  position: relative;
+  z-index: 1;
+}
+
+.section + .section {
+  border-top: 1px solid rgba(212,175,55,0.1);
+}
+
+.section-title {
+  font-family: 'Shippori Mincho', serif;
+  font-size: clamp(1.1rem, 3vw, 1.5rem);
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 0.12em;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.section-title::before {
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 1.4em;
+  background: linear-gradient(to bottom, var(--gold-light), var(--gold-dim));
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+/* ======= 結果リスト ======= */
+.result-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 2rem;
+}
+
+.result-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 18px 20px;
+  background: linear-gradient(135deg, rgba(212,175,55,0.06) 0%, rgba(0,0,0,0) 100%);
+  border: 1px solid rgba(212,175,55,0.12);
+  border-left: 3px solid var(--gold);
+  font-size: 0.95rem;
+  line-height: 1.8;
+}
+
+.result-list li::before {
+  content: '◆';
+  color: var(--gold);
+  font-size: 0.7rem;
+  flex-shrink: 0;
+  margin-top: 0.35em;
+}
+
+/* ======= プロフィール ======= */
+.profile-box {
+  background: linear-gradient(135deg, rgba(212,175,55,0.07) 0%, rgba(0,0,0,0) 100%);
+  border: 1px solid rgba(212,175,55,0.18);
+  padding: 32px;
+  margin-bottom: 2rem;
+}
+
+.profile-box p {
+  margin-bottom: 1.2rem;
+  font-size: 0.95rem;
+  line-height: 2.0;
+}
+.profile-box p:last-child { margin-bottom: 0; }
+
+.strong-gold {
+  color: var(--gold-light);
+  font-weight: 700;
+  text-shadow: 0 0 12px rgba(212,175,55,0.3);
+}
+
+/* ======= 講座内容 ======= */
+.course-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 2rem;
+}
+
+.course-list li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 0.95rem;
+  padding: 14px 18px;
+  border-bottom: 1px solid rgba(212,175,55,0.08);
+}
+
+.course-list li::before {
+  content: '●';
+  color: var(--gold);
+  font-size: 0.6rem;
+  flex-shrink: 0;
+}
+
+/* ======= FAQ ======= */
+.faq-item {
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(212,175,55,0.08);
+}
+.faq-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+.faq-q {
+  font-weight: 700;
+  color: var(--gold);
+  font-size: 0.95rem;
+  margin-bottom: 0.6rem;
+  letter-spacing: 0.05em;
+}
+
+.faq-a {
+  font-size: 0.93rem;
+  color: var(--text);
+  line-height: 2.0;
+  padding-left: 1em;
+  border-left: 2px solid rgba(212,175,55,0.2);
+}
+
+/* ======= 警告ボックス ======= */
+.warning-box {
+  background: rgba(20,10,0,0.8);
+  border: 1px solid rgba(212,175,55,0.25);
+  border-left: 4px solid var(--gold);
+  padding: 28px 28px;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+  line-height: 2.0;
+}
+
+/* ======= 募集・価格 ======= */
+.price-box {
+  text-align: center;
+  padding: 50px 28px;
+  background: linear-gradient(135deg, rgba(212,175,55,0.08) 0%, rgba(0,0,0,0) 60%);
+  border: 1px solid rgba(212,175,55,0.25);
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.price-box::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+  opacity: 0.6;
+}
+
+.price-label {
+  font-size: 0.85rem;
+  letter-spacing: 0.3em;
+  color: var(--gold-dim);
+  margin-bottom: 0.8rem;
+}
+
+.price-limit {
+  display: inline-block;
+  background: rgba(212,175,55,0.15);
+  border: 1px solid rgba(212,175,55,0.4);
+  color: var(--gold-light);
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 6px 20px;
+  letter-spacing: 0.15em;
+  margin-bottom: 1.5rem;
+}
+
+.price-amount {
+  font-family: 'Shippori Mincho', serif;
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  font-weight: 800;
+  color: var(--gold-light);
+  text-shadow: 0 0 30px rgba(240,208,80,0.5);
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+
+.price-note {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  margin-top: 0.6rem;
+}
+
+/* ======= CTAボタン ======= */
+.cta-wrap {
+  text-align: center;
+  padding: 20px 0 10px;
+}
+
+.cta-btn {
+  display: inline-block;
+  padding: 22px 56px;
+  background: linear-gradient(135deg, #c8860a 0%, #e8aa20 50%, #c8860a 100%);
+  color: #000;
+  text-decoration: none;
+  font-family: 'Noto Serif JP', serif;
+  font-size: 1.15rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  border-radius: 0;
+  box-shadow: 0 0 30px rgba(212,175,55,0.35), 0 4px 20px rgba(0,0,0,0.5);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-btn::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.4s ease;
+}
+
+.cta-btn:hover::before { left: 100%; }
+.cta-btn:hover {
+  box-shadow: 0 0 50px rgba(212,175,55,0.6), 0 6px 30px rgba(0,0,0,0.6);
+  transform: translateY(-2px);
+}
+
+.cta-note {
+  font-size: 0.82rem;
+  color: var(--text-dim);
+  margin-top: 1rem;
+}
+
+/* ======= メッセージ ======= */
+.closing-text {
+  font-size: 0.95rem;
+  line-height: 2.2;
+  margin-bottom: 1.2rem;
+}
+
+/* ======= 特定商取引 ======= */
+.tokusho {
+  background: rgba(10,8,0,0.9);
+  border-top: 1px solid rgba(212,175,55,0.12);
+  padding: 60px 24px;
+  position: relative;
+  z-index: 1;
+}
+
+.tokusho-inner {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.tokusho h2 {
+  font-size: 1rem;
+  color: var(--gold-dim);
+  letter-spacing: 0.2em;
+  margin-bottom: 1.8rem;
+  font-weight: 600;
+}
+
+.tokusho-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  color: var(--text-dim);
+}
+
+.tokusho-table tr {
+  border-bottom: 1px solid rgba(212,175,55,0.07);
+}
+
+.tokusho-table td {
+  padding: 10px 12px;
+  vertical-align: top;
+  line-height: 1.8;
+}
+
+.tokusho-table td:first-child {
+  white-space: nowrap;
+  color: var(--gold-dim);
+  width: 200px;
+  font-weight: 600;
+}
+
+/* 区切り線 */
+.divider {
+  max-width: 760px;
+  margin: 0 auto;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(212,175,55,0.3), transparent);
+}
+</style>
+</head>
+<body>
+
+<!-- ヒーロー -->
+<section class="hero">
+  <div class="hero-sub">Success Mindset Program</div>
+  <h1>10倍速・人生再構築プログラム</h1>
+  <h2>3ヶ月で「収益」と「自信」を取り戻す</h2>
+  <p class="hero-intro">
+    ここまでお読みいただきありがとうございます。<br>
+    もし今、少しでも「変わりたい」と感じているなら、<br>
+    このページはあなたのためのものです。
+  </p>
+</section>
+
+<!-- 3ヶ月後 -->
+<div class="section">
+  <h2 class="section-title">3ヶ月後、あなたはこうなります</h2>
+  <ul class="result-list">
+    <li>月30万円の収益導線の土台が完成</li>
+    <li>あなたの経験を「商品」として言語化</li>
+    <li>AIを使った発信が仕組み化</li>
+    <li>Kindle出版の基礎が完成</li>
+    <li>「自分でもできる」という確信が持てる</li>
+  </ul>
+  <p style="font-size:0.93rem; line-height:2.1;">
+    これは理想論ではありません。<br>
+    正しい順番で実践すれば、現実になります。
+  </p>
+</div>
+
+<div class="divider"></div>
+
+<!-- なぜ可能か -->
+<div class="section">
+  <h2 class="section-title">なぜ、それが可能なのか</h2>
+  <div class="profile-box">
+    <p>私は23歳で成功哲学に出会い、3ヶ月で600万円を達成。<br>45歳で資産1億円を築きました。</p>
+    <p>しかし50歳で全てを失い、ゼロに。<br>そこから63歳で<span class="strong-gold">1億5,000万円まで再構築</span>しました。</p>
+    <p>この経験から断言できます。<br><span class="strong-gold">成功は「才能」ではなく「技術」です。</span></p>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- 講座内容 -->
+<div class="section">
+  <h2 class="section-title">講座内容（3ヶ月）</h2>
+  <ul class="course-list">
+    <li>週1回 Zoom講義（全12回）</li>
+    <li>個別サポート（チャット＆相談）</li>
+    <li>成功思考ワーク実践</li>
+    <li>AI活用コンテンツ作成</li>
+    <li>Kindle出版戦略</li>
+  </ul>
+  <p style="font-size:0.93rem; line-height:2.1;">
+    ただ学ぶだけではありません。<br>
+    <span class="strong-gold">「行動 → 修正 → 結果」まで伴走します。</span>
+  </p>
+</div>
+
+<div class="divider"></div>
+
+<!-- FAQ -->
+<div class="section">
+  <h2 class="section-title">よくある不安</h2>
+  <div class="faq-item">
+    <p class="faq-q">Q. 自信がありません</p>
+    <p class="faq-a">最初からある人はいません。だからサポートがあります。</p>
+  </div>
+  <div class="faq-item">
+    <p class="faq-q">Q. 年齢的に遅くないですか？</p>
+    <p class="faq-a">私は63歳から再構築しました。</p>
+  </div>
+  <div class="faq-item">
+    <p class="faq-q">Q. 本当にできるか不安です</p>
+    <p class="faq-a">正しい順番でやれば、誰でも前に進めます。</p>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- このまま何もしなかった場合 -->
+<div class="section">
+  <h2 class="section-title">このまま何もしなかった場合</h2>
+  <div class="warning-box">
+    <p>時間だけが過ぎ、状況は変わらない可能性が高いです。</p>
+    <br>
+    <p>だからこそ今、決断する人から人生が動きます。</p>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- 募集・価格 -->
+<div class="section">
+  <h2 class="section-title">募集について</h2>
+  <div class="price-box">
+    <p class="price-label">今回の募集</p>
+    <div class="price-limit">【先着20名限定】</div>
+    <p style="font-size:0.88rem; color:var(--text-dim); margin-bottom:2rem;">一人一人と向き合うため、人数を制限しています。</p>
+    <p class="price-label">参加費</p>
+    <p class="price-amount">300,000円</p>
+    <p style="font-size:0.85rem; color:var(--gold); margin-top:0.2rem;">（税込）</p>
+    <p class="price-note">※分割払いも可能です</p>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- 最後に -->
+<div class="section">
+  <h2 class="section-title">最後に</h2>
+  <p class="closing-text">
+    ここまで読んでいるあなたは、<br>
+    すでに「変わりたい」と思っているはずです。
+  </p>
+  <p class="closing-text">
+    その気持ちを、行動に変えてください。
+  </p>
+  <p class="closing-text">
+    私は本気の人には、本気で向き合います。
+  </p>
+
+  <div class="cta-wrap">
+    <a href="ここにStripeリンク" target="_blank" class="cta-btn">今すぐ参加する</a>
+    <p class="cta-note">※クリック後、決済ページに移動します</p>
+  </div>
+</div>
+
+<!-- 特定商取引法 -->
+<footer class="tokusho">
+  <div class="tokusho-inner">
+    <h2>特定商取引法に基づく表記</h2>
+    <table class="tokusho-table">
+      <tr><td>販売業者</td><td>成功思考実践会（代表：長谷川 淳一）</td></tr>
+      <tr><td>住所</td><td>埼玉県川口市幸町1-3-24 パークホームズセンターコート702</td></tr>
+      <tr><td>電話番号</td><td>090-1446-1953</td></tr>
+      <tr><td>メールアドレス</td><td>jp-hase0413@docomo.ne.jp</td></tr>
+      <tr><td>お支払い方法</td><td>クレジットカード（Stripe）、銀行振込</td></tr>
+      <tr><td>販売価格</td><td>300,000円（税込）</td></tr>
+      <tr><td>商品引渡し時期</td><td>決済完了後3日以内にご案内</td></tr>
+      <tr><td>返品・キャンセル</td><td>商品の性質上、返金不可</td></tr>
+      <tr><td>注意書き</td><td>成果には個人差があります</td></tr>
+    </table>
+  </div>
+</footer>
+
+</body>
+</html>
