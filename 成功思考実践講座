@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>10倍速・人生再構築プログラム</title>
+<title>3ヶ月集中「人生反撃」成功思考実践講座</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600;700;900&family=Shippori+Mincho:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -406,8 +406,8 @@ body::before {
 <!-- ヒーロー -->
 <section class="hero">
   <div class="hero-sub">Success Mindset Program</div>
-  <h1>10倍速・人生再構築プログラム</h1>
-  <h2>3ヶ月で「収益」と「自信」を取り戻す</h2>
+  <h1>3ヶ月集中「人生反撃」<br>成功思考実践講座</h1>
+  <h2>あなたの経験を、3ヶ月で「形」にする伴走講座</h2>
   <p class="hero-intro">
     ここまでお読みいただきありがとうございます。<br>
     もし今、少しでも「変わりたい」と感じているなら、<br>
@@ -417,17 +417,17 @@ body::before {
 
 <!-- 3ヶ月後 -->
 <div class="section">
-  <h2 class="section-title">3ヶ月後、あなたはこうなります</h2>
+  <h2 class="section-title">3ヶ月で目指すこと</h2>
   <ul class="result-list">
-    <li>月30万円の収益導線の土台が完成</li>
+    <li>Kindle → 公式LINE → 説明会の、収益化に向けた導線の土台づくり</li>
     <li>あなたの経験を「商品」として言語化</li>
     <li>AIを使った発信が仕組み化</li>
-    <li>Kindle出版の基礎が完成</li>
-    <li>「自分でもできる」という確信が持てる</li>
+    <li>Kindle出版の企画から登録まで</li>
+    <li>小さな行動を積み重ね、「自分でもできる」という手応えをつかむ</li>
   </ul>
   <p style="font-size:0.93rem; line-height:2.1;">
-    これは理想論ではありません。<br>
-    正しい順番で実践すれば、現実になります。
+    大切なのは、正しい順番で実践し続けることです。<br>
+    ※結果には個人差があり、収入や成果を保証するものではありません。
   </p>
 </div>
 
@@ -476,7 +476,7 @@ body::before {
   </div>
   <div class="faq-item">
     <p class="faq-q">Q. 本当にできるか不安です</p>
-    <p class="faq-a">正しい順番でやれば、誰でも前に進めます。</p>
+    <p class="faq-a">不安なまま始めて大丈夫です。週1回の講義と個別サポートで、一歩ずつ進めていきます。</p>
   </div>
 </div>
 
@@ -486,9 +486,9 @@ body::before {
 <div class="section">
   <h2 class="section-title">このまま何もしなかった場合</h2>
   <div class="warning-box">
-    <p>時間だけが過ぎ、状況は変わらない可能性が高いです。</p>
+    <p>書きたい経験があっても、形にしなければ誰にも届きません。</p>
     <br>
-    <p>だからこそ今、決断する人から人生が動きます。</p>
+    <p>一人で進められる方は、Brain版『人生反撃の実務マニュアル』でも十分に始められます。<br>期限と伴走があったほうが進む方のために、この講座があります。</p>
   </div>
 </div>
 
@@ -499,12 +499,12 @@ body::before {
   <h2 class="section-title">募集について</h2>
   <div class="price-box">
     <p class="price-label">今回の募集</p>
-    <div class="price-limit">【先着20名限定】</div>
-    <p style="font-size:0.88rem; color:var(--text-dim); margin-bottom:2rem;">一人一人と向き合うため、人数を制限しています。</p>
+    <div class="price-limit">【定員20名】</div>
+    <p style="font-size:0.88rem; color:var(--text-dim); margin-bottom:2rem;">一人ひとりと向き合うため、人数を制限しています。定員に達した時点で募集を締め切ります。</p>
     <p class="price-label">参加費</p>
     <p class="price-amount">300,000円</p>
     <p style="font-size:0.85rem; color:var(--gold); margin-top:0.2rem;">（税込）</p>
-    <p class="price-note">※分割払いも可能です</p>
+    <p class="price-note">※分割払いも可能です<br>※結果には個人差があり、成果を保証するものではありません<br>※お申し込みの前に、下記「特定商取引法に基づく表記」をご確認ください</p>
   </div>
 </div>
 
@@ -542,8 +542,8 @@ body::before {
       <tr><td>お支払い方法</td><td>クレジットカード（Stripe）、銀行振込</td></tr>
       <tr><td>販売価格</td><td>300,000円（税込）</td></tr>
       <tr><td>商品引渡し時期</td><td>決済完了後3日以内にご案内</td></tr>
-      <tr><td>返品・キャンセル</td><td>商品の性質上、返金不可</td></tr>
-      <tr><td>注意書き</td><td>成果には個人差があります</td></tr>
+      <tr><td>返品・キャンセル</td><td>お申し込み後のキャンセル・返金は、原則としてお受けしておりません。ただし、クーリング・オフなど法令に基づく権利が認められる場合は、その定めに従います。</td></tr>
+      <tr><td>注意書き</td><td>成果には個人差があり、収入や成果を保証するものではありません</td></tr>
     </table>
   </div>
 </footer>
